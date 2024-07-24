@@ -1,0 +1,28 @@
+{
+  "modals": {
+    "confirm": "Yes",
+    "cancel": "Cancel",
+    "limit-message": "You can only add up to 5 cities. Please remove a city to add another.",
+    "delete-message": "Are you sure you want to remove this block?",
+    "remove": "Remove"
+  },
+  "menu": {
+    "main": "Main",
+    "favorite": "Favorite"
+  },
+  "switch": {
+    "day": "Show day",
+    "days": "Show week",
+    "day_mode": "Day",
+    "night_mode": "Night"
+  },
+  "card": {
+    "title": "Weather in",
+    "weather": "Weather",
+    "temperature": "Temperature",
+    "humidity": "Humidity",
+    "wind": "Wind Speed",
+    "time": "Time"
+  },
+  "autocomplete": "Enter city name"
+}
