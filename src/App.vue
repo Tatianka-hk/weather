@@ -6,14 +6,6 @@ import VsWeather from './components/vs-weather.vue'
 export default {
   components: { VsHeader, VsWeather }
 }
-
-//loader
-//day or nigth
-//deploytments
-
-//api in env
-//watch on
-//week remake
 </script>
 
 <template>

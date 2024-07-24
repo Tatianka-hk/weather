@@ -66,7 +66,7 @@ export default defineComponent({
   }
 })
 </script>
-<style scoped lang="scss">
+<style scoped>
 .vs-autocomplete-input.nyan {
   width: 249px;
   border: 1px solid #ccc;

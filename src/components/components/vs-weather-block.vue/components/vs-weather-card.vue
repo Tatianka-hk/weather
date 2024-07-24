@@ -58,7 +58,7 @@ export default defineComponent({
 })
 </script>
 
-<style scoped lang="scss">
+<style scoped>
 .weather-card.nyan {
   border-radius: 5px;
   padding: 20px;
