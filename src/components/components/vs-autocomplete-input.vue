@@ -22,14 +22,13 @@
 <script lang="ts">
 import axios from 'axios'
 import { defineComponent } from 'vue'
-// import 'dotenv/config'
 
 export default defineComponent({
   name: 'VsAutocompleteInput',
   data() {
     return {
       query: '',
-      suggestions: [],
+      suggestions: [] as any[],
       showSuggestions: false
     }
   },
@@ -53,7 +52,7 @@ export default defineComponent({
         this.suggestions = []
       }
     },
-    selectSuggestion(suggestion: string) {
+    selectSuggestion(suggestion: any) {
       this.query = `${suggestion.name}, ${suggestion.sys.country}`
       this.$emit('selected', suggestion)
       this.showSuggestions = false

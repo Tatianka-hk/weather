@@ -33,8 +33,8 @@ export default defineComponent({
   },
   mounted() {
     if (localStorage.getItem('weatherBlocks')) {
-      const blocks = JSON.parse(localStorage.getItem('weatherBlocks')) || []
-      const newData = blocks.find((el) => el.id === this.weather.id)
+      const blocks = JSON.parse(localStorage.getItem('weatherBlocks') ?? '[]') || []
+      const newData = blocks.find((el: any) => el.id === this.weather.id)
       this.isFavorite = newData.favorite
       console.log(newData)
     }
@@ -43,8 +43,8 @@ export default defineComponent({
     toggleFavorite() {
       this.isFavorite = !this.isFavorite
       if (localStorage.getItem('weatherBlocks')) {
-        const blocks = JSON.parse(localStorage.getItem('weatherBlocks')) || []
-        const newData = blocks.map((el) =>
+        const blocks = JSON.parse(localStorage.getItem('weatherBlocks') ?? '[]') || []
+        const newData = blocks.map((el: any) =>
           el.id === this.weather.id ? { ...el, favorite: this.isFavorite } : el
         )
         localStorage.setItem('weatherBlocks', JSON.stringify(newData))

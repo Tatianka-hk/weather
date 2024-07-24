@@ -5,7 +5,7 @@
     </button>
     <VsWeatherCard :weather="weather" v-if="weather && !isWeeklyView" />
     <VsWeatherWeek :weather="weekData" v-if="weather && isWeeklyView" />
-    <VsWeatherChart :weatherWeek="weekData" :chartId="weather?.id" v-if="weekData" />
+    <VsWeatherChart :weatherWeek="weekData" :chartId="`${weather?.id}`" v-if="weekData" />
     <vsLoader v-if="isPending" />
     <button @click="removeBlock" v-if="!isFavoriteBlock">{{ $t('modals.remove') }}</button>
   </div>
@@ -22,7 +22,7 @@ export default defineComponent({
   components: { VsWeatherCard, VsWeatherWeek, VsWeatherChart, vsLoader },
   props: {
     weather: {
-      default: null
+      default: {} as any
     },
     isFavoriteBlock: {
       default: false
@@ -48,9 +48,9 @@ export default defineComponent({
     async getWeatherList() {
       const API_KEY = 'd66b587ec053ca4ba840017f7db007f3'
       try {
-        const lang = localStorage.getItem('lang') ? localStorage.getItem('lang') : 'en'
+        const lang = localStorage.getItem('lang') || 'en'
         const res = await axios.get(
-          `https://api.openweathermap.org/data/2.5/forecast?lat=${this.weather.coord.lat}&lon=${this.weather.coord.lon}&appid=${API_KEY}&units=metric&lang=${lang}`
+          `https://api.openweathermap.org/data/2.5/forecast?lat=${this.weather?.coord?.lat}&lon=${this.weather?.coord?.lon}&appid=${API_KEY}&units=metric&lang=${lang}`
         )
         this.weekData = res.data
       } catch (err) {
@@ -68,7 +68,7 @@ export default defineComponent({
 })
 </script>
 
-<style scoped lang="scss">
+<style scoped>
 .vs-weather-block {
   border-radius: 10px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);

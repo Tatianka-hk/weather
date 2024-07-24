@@ -10,8 +10,8 @@ export default defineComponent({
   props: {
     weatherWeek: Object,
     chartId: {
-      type: Number,
-      default: 0
+      type: String,
+      default: '0'
     }
   },
   mounted() {
@@ -23,17 +23,19 @@ export default defineComponent({
   },
   methods: {
     renderChart() {
-      const weatherData = this.weatherWeek.list
+      const weatherData = this.weatherWeek?.list
 
-      const labels = weatherData.map((entry) => {
+      const labels = weatherData.map((entry: any) => {
         const date = new Date(entry.dt * 1000)
         return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
       })
 
-      const temperatures = weatherData.map((entry) => entry.main.temp)
-
-      const ctx = document.getElementById(this.chartId).getContext('2d')
-
+      const temperatures = weatherData.map((entry: any) => entry.main.temp)
+      const element = document.getElementById(this.chartId) as HTMLCanvasElement
+      const ctx = element.getContext('2d')
+      if (!ctx) {
+        return null
+      }
       new Chart(ctx, {
         type: 'line',
         data: {

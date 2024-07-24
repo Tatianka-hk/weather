@@ -36,7 +36,7 @@ export default defineComponent({
   setup() {
     const { locale } = useI18n()
     onMounted(() => {
-      if (localStorage.getItem('lang')) locale.value = localStorage.getItem('lang')
+      locale.value = localStorage.getItem('lang') || 'en'
       isDay.value = localStorage.getItem('mode') === 'true' ? true : false
     })
     const isDay = ref(true)

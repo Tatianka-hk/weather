@@ -22,7 +22,10 @@ import { defineComponent } from 'vue'
 export default defineComponent({
   name: 'VsWeatherWeek',
   props: {
-    weather: Object
+    weather: {
+      type: Object as () => Record<string, any> | null,
+      default: null
+    }
   },
   data() {
     return {
@@ -34,7 +37,7 @@ export default defineComponent({
   },
   computed: {
     dailyWeather() {
-      const weatherList = this.weather.list
+      const weatherList = this.weather?.list
       const dailyData: any = {}
 
       weatherList.forEach((entry: any) => {
@@ -51,8 +54,8 @@ export default defineComponent({
         dailyData[dayString].temps.push(entry.main.temp)
       })
 
-      return Object.values(dailyData).map((day) => {
-        const avgTemp = day.temps.reduce((a, b) => a + b, 0) / day.temps.length
+      return Object.values(dailyData).map((day: any) => {
+        const avgTemp = day.temps.reduce((a: number, b: number) => a + b, 0) / day.temps.length
         return {
           ...day,
           avgTemp

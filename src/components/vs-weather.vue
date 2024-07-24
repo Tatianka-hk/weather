@@ -22,8 +22,8 @@ export default defineComponent({
   components: { vsWeatherBlock, vsConfirmationModal, vsAutocompleteInput, VsLimitExceededModal },
   data() {
     return {
-      blocks: [],
-      weatherData: [],
+      blocks: [] as any[],
+      weatherData: [] as any[],
       maxBlocks: 5,
       showModal: false,
       showLimitModal: false,
@@ -34,7 +34,7 @@ export default defineComponent({
     setToLocalStorage() {
       localStorage.setItem('weatherBlocks', JSON.stringify(this.blocks))
     },
-    addBlock(weatherData: Object) {
+    addBlock(weatherData: any) {
       if (this.blocks?.length < this.maxBlocks) {
         this.blocks.push(weatherData)
         this.weatherData.push(weatherData)
@@ -82,7 +82,7 @@ export default defineComponent({
         console.log(err)
       }
     },
-    async getCityData(cityID) {
+    async getCityData(cityID: number) {
       const API_KEY = 'd66b587ec053ca4ba840017f7db007f3'
       try {
         const response = await axios.get(`https://api.openweathermap.org/data/2.5/weather`, {
@@ -102,8 +102,8 @@ export default defineComponent({
 
   async mounted() {
     if (localStorage.getItem('weatherBlocks')) {
-      this.blocks = JSON.parse(localStorage.getItem('weatherBlocks'))
-      this.blocks.forEach((block: Object) => {
+      this.blocks = JSON.parse(localStorage.getItem('weatherBlocks') ?? '[]')
+      this.blocks.forEach((block: any) => {
         this.getCityData(block.id)
       })
     } else {
@@ -113,7 +113,7 @@ export default defineComponent({
   }
 })
 </script>
-<style lang="scss">
+<style>
 .weather {
   margin-top: 121px;
   padding: 1rem;

@@ -13,14 +13,13 @@ export default defineComponent({
   components: { VsWeatherBlock },
   data() {
     return {
-      favoriteWeather: []
+      favoriteWeather: [] as any[]
     }
   },
   mounted() {
-    console.log(localStorage.getItem('weatherBlocks'))
     if (localStorage.getItem('weatherBlocks')) {
-      const blocks = JSON.parse(localStorage.getItem('weatherBlocks'))
-      blocks.forEach((el) => {
+      const blocks = JSON.parse(localStorage.getItem('weatherBlocks') ?? '[]')
+      blocks.forEach((el: any) => {
         if (el.favorite) this.favoriteWeather.push(el)
       })
     }
