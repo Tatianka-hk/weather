@@ -36,7 +36,6 @@ export default defineComponent({
       const blocks = JSON.parse(localStorage.getItem('weatherBlocks') ?? '[]') || []
       const newData = blocks.find((el: any) => el.id === this.weather.id)
       this.isFavorite = newData.favorite
-      console.log(newData)
     }
   },
   methods: {

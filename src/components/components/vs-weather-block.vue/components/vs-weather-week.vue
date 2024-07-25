@@ -55,10 +55,11 @@ export default defineComponent({
       })
 
       return Object.values(dailyData).map((day: any) => {
-        const avgTemp = day.temps.reduce((a: number, b: number) => a + b, 0) / day.temps.length
+        let avgTemp = day.temps.reduce((a: number, b: number) => a + b, 0) / day.temps.length
+        const temp = Number(avgTemp.toFixed(1))
         return {
           ...day,
-          avgTemp
+          temp
         }
       })
     }
@@ -66,7 +67,8 @@ export default defineComponent({
   methods: {
     getDayName(dateString: string) {
       const date = new Date(dateString)
-      return date.toLocaleDateString('uk-UA', { weekday: 'long' })
+      const lang = localStorage.getItem('lang') || 'en'
+      return date.toLocaleDateString(lang, { weekday: 'long' })
     }
   }
 })
@@ -92,8 +94,8 @@ export default defineComponent({
   background-color: white;
   color: black;
 }
-.weather-day.nigth {
-  background-color: #2c3e50;
+.weather-day.night {
+  background-color: #34495e;
   color: #e36969;
 }
 .weather-day img {
